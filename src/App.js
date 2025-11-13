@@ -1,12 +1,11 @@
-import logo from './logo.svg';
+
 import './App.css';
 import MovingSkillsContainer from './components/MovingSkillsContainer';
-import Example from './components/DashBoard';
 import PortfolioHomepage from './components/PortfolioHomepage'; 
 import AboutSection from './components/AboutSection';
 import ProjectsSection from './components/ProjectsSection';
 import ContactUs from './components/ContactUs';
-import { Radius } from 'lucide-react';
+
 
 
 function App() {
