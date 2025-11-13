@@ -20,14 +20,14 @@ const PortfolioHomepage = () => {
     {
       name: 'GitHub',
       icon: Github,
-      url: 'https://github.com/yourusername',
+      url: 'https://github.com/minakshibiradar',
       color: '#333333',
       hoverColor: '#6366f1'
     },
     {
       name: 'LinkedIn', 
       icon: Linkedin,
-      url: 'https://linkedin.com/in/yourusername',
+      url: 'https://www.linkedin.com/in/minakshi-baliram-biradar-080425236/',
       color: '#0077b5',
       hoverColor: '#0096dc'
     },
@@ -41,7 +41,7 @@ const PortfolioHomepage = () => {
     {
       name: 'Email',
       icon: Mail,
-      url: 'mailto:your.email@example.com', 
+      url: 'mailto:minakshibiradar61@gmail.com', 
       color: '#ea4335',
       hoverColor: '#ff6b6b'
     },
@@ -55,7 +55,7 @@ const PortfolioHomepage = () => {
     {
       name: 'LeetCode',
       icon: Code,
-      url: 'https://leetcode.com/yourusername/',
+      url: 'https://leetcode.com/u/minakshibb/',
       color: '#ffa116',
       hoverColor: '#ffb84d'
     }

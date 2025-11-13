@@ -41,19 +41,43 @@ const ContactSection = () => {
     });
   };
 
+  // ✅ Updated: uses Web3Forms with access_key
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+    setSubmitStatus('');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: '6db2ac12-3098-40eb-933f-e42eb9695464', // 🔑 Replace this with your real Web3Forms access key
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
       setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      
-      // Clear success message after 3 seconds
       setTimeout(() => setSubmitStatus(''), 3000);
-    }, 2000);
+    }
   };
 
   const contactInfo = [
@@ -61,18 +85,18 @@ const ContactSection = () => {
       icon: Mail,
       title: 'Email',
       value: 'hello@itsme.com',
-      link: 'mailto:hello@yourname.com'
+      link: 'mailto:neworld17777@gmail.com'
     },
     {
       icon: Phone,
       title: 'Phone',
       value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      link: 'tel:+1234567890'
     },
     {
       icon: MapPin,
       title: 'Location',
-      value: 'Maharashtra,India',
+      value: 'India',
       link: '#'
     }
   ];
@@ -81,34 +105,29 @@ const ContactSection = () => {
     {
       icon: Linkedin,
       name: 'LinkedIn',
-      url: 'https://linkedin.com/in/yourprofile',
+      url: 'https://www.linkedin.com/in/minakshi-baliram-biradar-080425236/',
       color: 'hover:text-blue-400'
     },
     {
       icon: Github,
       name: 'GitHub',
-      url: 'https://github.com/yourusername',
+      url: 'https://github.com/minakshibiradar',
       color: 'hover:text-gray-400'
     },
     {
       icon: Twitter,
       name: 'Twitter',
-      url: 'https://twitter.com/yourusername',
+      url: 'https://twitter.com',
       color: 'hover:text-blue-300'
     }
   ];
 
   return (
-    <section 
-      ref={sectionRef}
-      className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden"
-    >
-      {/* Background Pattern */}
+    <section ref={sectionRef} className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <div className="grid-background"></div>
       </div>
 
-      {/* Floating Shapes */}
       <div className="absolute inset-0">
         <div className="floating-shape shape-1"></div>
         <div className="floating-shape shape-2"></div>
@@ -116,42 +135,41 @@ const ContactSection = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Section Title */}
         <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold text-white transition-all duration-1000 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
+          <h2
+            className={`text-4xl md:text-5xl font-bold text-white transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             Get In <span className="text-gradient">Touch</span>
           </h2>
-          <div className={`w-20 h-1 bg-gradient-to-r from-white to-gray-400 mx-auto mt-4 transition-all duration-1000 delay-300 ${
-            isVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
-          }`}></div>
-          <p className={`text-gray-400 mt-6 max-w-2xl mx-auto transition-all duration-1000 delay-500 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-          }`}>
-            Have a project in mind or want to collaborate? I'd love to hear from you. 
+          <div
+            className={`w-20 h-1 bg-gradient-to-r from-white to-gray-400 mx-auto mt-4 transition-all duration-1000 delay-300 ${
+              isVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'
+            }`}
+          ></div>
+          <p
+            className={`text-gray-400 mt-6 max-w-2xl mx-auto transition-all duration-1000 delay-500 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`}
+          >
+            Have a project in mind or want to collaborate? I'd love to hear from you.
             Let's create something amazing together!
           </p>
         </div>
 
-        {/* Contact Content */}
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Left Column - Contact Info & Social */}
-          <div className={`space-y-8 transition-all duration-1000 delay-700 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-          }`}>
-            {/* Contact Info Cards */}
+          <div
+            className={`space-y-8 transition-all duration-1000 delay-700 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            }`}
+          >
             <div className="space-y-6">
               <h3 className="text-2xl font-semibold text-white mb-6">Contact Information</h3>
               {contactInfo.map((info, index) => {
                 const Icon = info.icon;
                 return (
-                  <a
-                    key={index}
-                    href={info.link}
-                    className="contact-info-card group"
-                    style={{ animationDelay: `${800 + index * 150}ms` }}
-                  >
+                  <a key={index} href={info.link} className="contact-info-card group" style={{ animationDelay: `${800 + index * 150}ms` }}>
                     <div className="contact-icon">
                       <Icon size={24} />
                     </div>
@@ -164,10 +182,11 @@ const ContactSection = () => {
               })}
             </div>
 
-            {/* Social Links */}
-            <div className={`transition-all duration-1000 delay-1200 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-            }`}>
+            <div
+              className={`transition-all duration-1000 delay-1200 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+              }`}
+            >
               <h3 className="text-2xl font-semibold text-white mb-6">Follow Me</h3>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => {
@@ -188,10 +207,11 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* Decorative Quote */}
-            <div className={`quote-card transition-all duration-1000 delay-1500 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
-            }`}>
+            <div
+              className={`quote-card transition-all duration-1000 delay-1500 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+              }`}
+            >
               <p className="text-gray-300 italic text-lg leading-relaxed">
                 "The best way to predict the future is to create it."
               </p>
@@ -199,13 +219,14 @@ const ContactSection = () => {
             </div>
           </div>
 
-          {/* Right Column - Contact Form */}
-          <div className={`transition-all duration-1000 delay-900 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-          }`}>
+          <div
+            className={`transition-all duration-1000 delay-900 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}
+          >
             <div className="contact-form-container">
               <h3 className="text-2xl font-semibold text-white mb-6">Send a Message</h3>
-              
+
               {submitStatus === 'success' && (
                 <div className="success-message">
                   <Send size={20} />
@@ -213,7 +234,14 @@ const ContactSection = () => {
                 </div>
               )}
 
-              <div className="space-y-6">
+              {submitStatus === 'error' && (
+                <div className="success-message" style={{ background: 'rgba(239,68,68,0.2)', borderColor: 'rgba(239,68,68,0.3)', color: '#f87171' }}>
+                  <Send size={20} />
+                  <span>Something went wrong. Please try again later.</span>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="form-group">
                   <label htmlFor="name" className="form-label">
                     <User size={18} />
@@ -282,11 +310,7 @@ const ContactSection = () => {
                   ></textarea>
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="submit-button group"
-                >
+                <button type="submit" disabled={isSubmitting} className="submit-button group">
                   <span className="relative z-10 flex items-center gap-2">
                     {isSubmitting ? (
                       <>
@@ -302,11 +326,12 @@ const ContactSection = () => {
                   </span>
                   <div className="button-bg"></div>
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
+
 
       <style jsx>{`
         .grid-background {
